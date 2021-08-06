@@ -98,60 +98,6 @@ export default {
         },
         showInfoSmu() {
             this.setIsSmuPageOpen(true);
-            return;
-            this.$modal.show('dialog', {
-                title: '',
-                text: '   <div class="contact-info">\n' +
-                    '         <div class="header">\n' +
-                    '             <h1>Контактная информация</h1>\n' +
-                    '         </div>\n' +
-                    '   <div class="logo">\n' +
-                    '       <img src="EhP_z2AN8Es.jpg" alt="">\n' +
-                    '   </div>\n' +
-                    '    <div class="content">\n' +
-                    '        <div class="title">\n' +
-                    '             СМУ Sigma-МГТУ  \n' +
-                    '        </div>\n' +
-                    '          <div class="title-address">\n' +
-                    '                 Северо-западный федеральный округ, Мурманская обл., г. Мурманск\n' +
-                    '           </div>\n' +
-                    '           <div class="line">\n' +
-                    '              <span>Адрес:     </span>  \n' +
-                    '              <a href="#">83038, Мурманск, ул. Ленина , 16:</a>\n' +
-                    '           </div>\n' +
-                    '            <div class="line">\n' +
-                    '              <span>Телефон: </span>  \n' +
-                    '              <a href="tel:+7 8152 21-35-36">+7 8152 21-35-36</a>\n' +
-                    '           </div>\n' +
-                    '            \n' +
-                    '           <div class="line">\n' +
-                    '              <span>Email:       </span>  \n' +
-                    '              <a href="mailto:contact@mgtu.ru">contact@mgtu.ru</a>\n' +
-                    '           </div>\n' +
-                    '             \n' +
-                    '             <div class="line">\n' +
-                    '              <span>Сайт:        </span>  \n' +
-                    '              <a href="https://mgtu.ru">mgtu.ru</a>\n' +
-                    '             </div>\n' +
-                    '          </div>\n' +
-                    '          <div class="about">\n' +
-                    '              <p>\n' +
-                    '                 <b>О нас: </b> Научная группа работает под руководством ведущих ученых в области биофизики, иммунологии, биоинформатики последовательностей (в том числе анализа данных NGS), молекулярной биологии и генетики. Команда компании BostonGene активно поддерживает научную группу по всем перспективным направлениям, включая совместную работу над публикациями в высокорейтинговых зарубежных журналах. В команде исследователей и разработчиков – пять докторов наук, врачи из ведущих онкологических клиник России и США, профессора ведущих научных заведений в России и США. \n' +
-                    '              </p>\n' +
-                    '          </div>\n' +
-                    '          <div class="tags">\n' +
-                    '              <div class="tag">Медицина</div>\n' +
-                    '              <div class="tag">био-информатика</div>\n' +
-                    '              <div class="tag">материаловедение</div>\n' +
-                    '              <div class="tag">материаловедение</div>\n' +
-                    '              <div class="tag">материаловедение</div>\n' +
-                    '              <div class="tag">материаловедение</div>\n' +
-                    '              <div class="tag">Медицина</div>\n' +
-                    '              <div class="tag">био-информатика</div>\n' +
-                    '              <div class="tag">материаловедение</div>\n' +
-                    '         </div>\n' +
-                    '    </div>'
-            })
         }
     },
     computed: {

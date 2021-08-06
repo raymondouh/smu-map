@@ -92,11 +92,11 @@
 <script>
 import tooltip from "./Tooltip"
 export default {
+    components: {
+      tooltip
+  },
     props: {
         rangeLegend: Object
-    },
-    components: {
-        tooltip
     },
     data() {
         return {
@@ -171,5 +171,4 @@ export default {
 .scale-background {
     fill: transparent;
 }
-
 </style>
