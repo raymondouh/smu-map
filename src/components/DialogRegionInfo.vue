@@ -1,5 +1,5 @@
 <template>
-<div class="info" v-if="selectedRegion">
+<div class="info" v-if="isDialogDisplayed" :style="{top: dialogCoordinates.coordinateY + 'px', left: dialogCoordinates.coordinateX + 'px'}"><!--v-if="selectedRegion"-->
     <div class="region-name">
         {{selectedRegion.name}}
     </div>
@@ -62,7 +62,9 @@ export default {
     },
     computed: {
         ...mapGetters([
-            'selectedRegion'
+            'selectedRegion',
+            'isDialogDisplayed',
+            'dialogCoordinates'
         ]),
 
         isSidebarOpen() {
@@ -75,15 +77,12 @@ export default {
 <style scoped>
 .info {
     text-align: center;
-    /*visibility: hidden;*/
     position: absolute;
-    top: 5%;
-    left: 5%;
     z-index: 1;
     height: 174px;
     width: 320px;
     padding: 20px;
-    font-family: 'Roboto', sans-serif;
+    //font-family: 'Roboto', sans-serif;
     background: #F2F2F2;
     border: 2px solid #6AB1E4;
     box-sizing: border-box;
@@ -115,6 +114,7 @@ export default {
     flex: auto;
     height: 100%;
     border-bottom: 1px solid transparent;
+    border-image: -webkit-linear-gradient(to left, rgba(0, 0, 0, .25), rgba(0, 0, 0, 1), rgba(0, 0, 0, .25));
     border-image: linear-gradient(to left, rgba(0, 0, 0, .25), rgba(0, 0, 0, 1), rgba(0, 0, 0, .25));
     border-image-slice: 1;
 }

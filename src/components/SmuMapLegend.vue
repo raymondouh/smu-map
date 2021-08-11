@@ -116,6 +116,7 @@ export default {
 }
 
 .legend-body svg {
+    background: -webkit-linear-gradient(#5E8CF0, #D7D7D7);
     background: linear-gradient(#5E8CF0, #D7D7D7);
 }
 

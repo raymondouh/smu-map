@@ -6,17 +6,25 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
     state: {
+        isDialogDisplayed: false,
         isSidebarOpen: false,
         isSmuPageOpen: false,
         selectedRegionId: null,
         mapRussia: mapRussia,
         legendStartColor: '#D7D7D7',
         legendEndColor: '#5E8CF0',
-        legendHoverColor: '#EB5757'
+        legendHoverColor: '#EB5757',
+        dialogCoordinates: {
+            coordinateX: "",
+            coordinateY: ""
+        }
     },
     getters: {
         selectedRegion: state => {
             return state.mapRussia[state.selectedRegionId];
+        },
+        dialogCoordinates: state => {
+            return state.dialogCoordinates;
         },
         smuNumRange: state => {
             return getRangeRegionProperty(state.mapRussia, 'smuNum');
@@ -24,8 +32,17 @@ const store = new Vuex.Store({
         scientistsNumRange: state => {
             return getRangeRegionProperty(state.mapRussia, 'scientists');
         },
+        isDialogDisplayed: state => {
+            return state.isDialogDisplayed;
+        }
     },
     mutations: {
+        setIsDialogDisplayed(state, yesno) {
+            state.isDialogDisplayed = yesno;
+        },
+        setDialogCoordinates(state, dialogCoordinates){
+            state.dialogCoordinates = dialogCoordinates;
+        },
         setIsSidebarOpen(state, yesno) {
             state.isSidebarOpen = yesno;
         },

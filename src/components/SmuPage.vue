@@ -399,7 +399,7 @@ export default {
 .SMU-page {
     z-index: 150;
     color: #575757;
-    font-family: 'Roboto', sans-serif;
+    //font-family: 'Roboto', sans-serif;
     font-style: normal;
     height: 100%;
     width: 100%;
@@ -796,7 +796,7 @@ export default {
 
 .back-btn-text {
     transform: translateX(-15px);
-    font-family: 'Roboto', sans-serif;
+    //font-family: 'Roboto', sans-serif;
     font-weight: 600;
     font-size: 12px;
 }

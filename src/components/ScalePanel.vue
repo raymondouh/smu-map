@@ -74,7 +74,7 @@ export default {
     //height: 100%;
 }
 .input-range-scale {
-    font-family: 'Roboto', sans-serif;
+    //font-family: 'Roboto', sans-serif;
     font-size: 1rem;
     line-height: 1.1875rem;
     font-weight: 300;

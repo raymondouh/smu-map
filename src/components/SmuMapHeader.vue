@@ -85,7 +85,7 @@ label {
 
 .smu-map-header {
     text-align: center;
-    font-family: 'Roboto', sans-serif;
+    //font-family: 'Roboto', sans-serif;
     display: flex;
     justify-content: space-between;
 }
@@ -93,7 +93,7 @@ label {
 .smu-map-header-title,
 .space {
     color: #064ebe;
-    width: 260px;
+    width: 300px;
 }
 
 .space {

@@ -24,7 +24,7 @@ export default {
 <style>
 .tooltip {
     position: relative;
-    font-family: 'Roboto', sans-serif;
+    //font-family: 'Roboto', sans-serif;
     background: transparent;
     width: 30px;
 }
@@ -73,15 +73,15 @@ export default {
 }
 [data-tooltip]:not([data-flow])::after,
 [data-tooltip][data-flow="top"]::after {
-  bottom: calc(100% + 10px);
+  bottom: calc(100% + 9px);
 }
 [data-tooltip]:not([data-flow])::before,
 [tooltip]:not([data-flow])::after,
 [data-tooltip][data-flow="top"]::before,
 [data-tooltip][data-flow="top"]::after {
   left: 50%;
-  -webkit-transform: translate(-50%, -4px);
-          transform: translate(-50%, -4px);
+  -webkit-transform: translate(-50%, -5px);
+          transform: translate(-50%, -5px);
 }
 [data-tooltip][data-flow="bottom"]::before {
   top: 100%;
@@ -93,8 +93,8 @@ export default {
 }
 [data-tooltip][data-flow="bottom"]::before, [data-tooltip][data-flow="bottom"]::after {
   left: 50%;
-  -webkit-transform: translate(-50%, 8px);
-          transform: translate(-50%, 8px);
+  -webkit-transform: translate(-50%, 5px);
+          transform: translate(-50%, 5px);
 }
 [data-tooltip][data-flow="left"]::before {
   top: 50%;
@@ -133,11 +133,11 @@ export default {
     cursor: pointer;
     margin: 0 auto;
     color: white;
-    width: 1.25rem;
-    height: 1.25rem;
-    border-radius: .25rem;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
+    width: 1rem;
+    height: 1rem;
+    border-radius: .2rem;
+    font-size: 0.7rem;
+    line-height: 1rem;
     text-align: center;
     background: rgba(94, 140, 240, 0.6);
 }

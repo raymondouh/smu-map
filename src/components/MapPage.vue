@@ -5,10 +5,9 @@
     <div class="map-wraper">
         <SmuMapLegend :rangeLegend="rangeLegend"></SmuMapLegend>
         <ScalePanel></ScalePanel>
-        <dialog-region-info></dialog-region-info>
         <RussianMap></RussianMap>
-
     </div>
+    <dialog-region-info></dialog-region-info>
 </div>
 </template>
 

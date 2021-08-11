@@ -223,7 +223,7 @@ export default {
     color: #575757;
     overflow: hidden;
     padding: 30px 0 40px 40px;
-    font-family: 'Roboto', sans-serif;
+    //font-family: 'Roboto', sans-serif;
     transition: .5s;
     background: white;
     z-index: 3;
