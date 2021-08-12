@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="list-smu" v-if="selectedRegion">
-                <regionSmu v-for="(item, key) in smuListFilterred" :smu="item" :selectedRegion="selectedRegion"></regionSmu>
+                <regionSmu v-for="(item, key) in smuListFilterred" :smu="item" :id="key" :selectedRegion="selectedRegion"></regionSmu>
             </div>
         </div>
     </transition>
@@ -60,7 +60,7 @@ export default {
             return this.$store.state.isSidebarOpen;
         },
         smuListFilterred() {
-            return this.searchParam === '' ? this.smuList : Object.values(this.smuList).filter(item  => item.name.includes(this.searchParam));
+            return this.searchParam === '' ? this.smuList : Object.values(this.smuList).filter(item  => item.name.toLowerCase().includes(this.searchParam.toLowerCase()));
         }
     },
     data() {

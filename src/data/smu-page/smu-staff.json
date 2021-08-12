@@ -1,0 +1,217 @@
+{
+    "smuSigma": [{
+            "name": "Владислав Иванов",
+            "position": "Председатель СМУ",
+            "email": "vlad@mgtu.ru",
+            "scienceID": "Science-ID",
+            "imgName": "ivanov.png"
+        },
+        {
+            "name": "Иван Петров",
+            "position": "Первый помощник председателя",
+            "email": "petrov@mgtu.ru",
+            "scienceID": "Science-ID",
+            "imgName": "petrov.png"
+        },
+        {
+            "name": "Иван Петров",
+            "position": "Первый помощник председателя",
+            "email": "petrov@mgtu.ru",
+            "scienceID": "Science-ID",
+            "imgName": "petrov.png"
+        },
+        {
+            "name": "Иван Петров",
+            "position": "Первый помощник председателя",
+            "email": "petrov@mgtu.ru",
+            "scienceID": "Science-ID",
+            "imgName": "petrov.png"
+        },
+        {
+            "name": "Иван Петров",
+            "position": "Первый помощник председателя",
+            "email": "petrov@mgtu.ru",
+            "scienceID": "Science-ID",
+            "imgName": "petrov.png"
+        },
+        {
+            "name": "Иван Петров",
+            "position": "Первый помощник председателя",
+            "email": "petrov@mgtu.ru",
+            "scienceID": "Science-ID",
+            "imgName": "petrov.png"
+        }
+    ],
+    "smuAlpha": [{
+            "name": "Владислав Иванов",
+            "position": "Председатель СМУ",
+            "email": "vlad@mgtu.ru",
+            "scienceID": "Science-ID",
+            "imgName": "ivanov.png"
+        },
+        {
+            "name": "Иван Петров",
+            "position": "Первый помощник председателя",
+            "email": "petrov@mgtu.ru",
+            "scienceID": "Science-ID",
+            "imgName": "petrov.png"
+        },
+        {
+            "name": "Иван Петров",
+            "position": "Первый помощник председателя",
+            "email": "petrov@mgtu.ru",
+            "scienceID": "Science-ID",
+            "imgName": "petrov.png"
+        },
+        {
+            "name": "Иван Петров",
+            "position": "Первый помощник председателя",
+            "email": "petrov@mgtu.ru",
+            "scienceID": "Science-ID",
+            "imgName": "petrov.png"
+        },
+        {
+            "name": "Иван Петров",
+            "position": "Первый помощник председателя",
+            "email": "petrov@mgtu.ru",
+            "scienceID": "Science-ID",
+            "imgName": "petrov.png"
+        },
+        {
+            "name": "Иван Петров",
+            "position": "Первый помощник председателя",
+            "email": "petrov@mgtu.ru",
+            "scienceID": "Science-ID",
+            "imgName": "petrov.png"
+        }
+    ],
+    "smuGamma": [{
+            "name": "Владислав Иванов",
+            "position": "Председатель СМУ",
+            "email": "vlad@mgtu.ru",
+            "scienceID": "Science-ID",
+            "imgName": "ivanov.png"
+        },
+        {
+            "name": "Иван Петров",
+            "position": "Первый помощник председателя",
+            "email": "petrov@mgtu.ru",
+            "scienceID": "Science-ID",
+            "imgName": "petrov.png"
+        },
+        {
+            "name": "Иван Петров",
+            "position": "Первый помощник председателя",
+            "email": "petrov@mgtu.ru",
+            "scienceID": "Science-ID",
+            "imgName": "petrov.png"
+        },
+        {
+            "name": "Иван Петров",
+            "position": "Первый помощник председателя",
+            "email": "petrov@mgtu.ru",
+            "scienceID": "Science-ID",
+            "imgName": "petrov.png"
+        },
+        {
+            "name": "Иван Петров",
+            "position": "Первый помощник председателя",
+            "email": "petrov@mgtu.ru",
+            "scienceID": "Science-ID",
+            "imgName": "petrov.png"
+        },
+        {
+            "name": "Иван Петров",
+            "position": "Первый помощник председателя",
+            "email": "petrov@mgtu.ru",
+            "scienceID": "Science-ID",
+            "imgName": "petrov.png"
+        }
+    ],
+    "smuTetta": [{
+            "name": "Владислав Иванов",
+            "position": "Председатель СМУ",
+            "email": "vlad@mgtu.ru",
+            "scienceID": "Science-ID",
+            "imgName": "ivanov.png"
+        },
+        {
+            "name": "Иван Петров",
+            "position": "Первый помощник председателя",
+            "email": "petrov@mgtu.ru",
+            "scienceID": "Science-ID",
+            "imgName": "petrov.png"
+        },
+        {
+            "name": "Иван Петров",
+            "position": "Первый помощник председателя",
+            "email": "petrov@mgtu.ru",
+            "scienceID": "Science-ID",
+            "imgName": "petrov.png"
+        },
+        {
+            "name": "Иван Петров",
+            "position": "Первый помощник председателя",
+            "email": "petrov@mgtu.ru",
+            "scienceID": "Science-ID",
+            "imgName": "petrov.png"
+        },
+        {
+            "name": "Иван Петров",
+            "position": "Первый помощник председателя",
+            "email": "petrov@mgtu.ru",
+            "scienceID": "Science-ID",
+            "imgName": "petrov.png"
+        },
+        {
+            "name": "Иван Петров",
+            "position": "Первый помощник председателя",
+            "email": "petrov@mgtu.ru",
+            "scienceID": "Science-ID",
+            "imgName": "petrov.png"
+        }
+    ],
+    "smuDelta": [{
+            "name": "Владислав Иванов",
+            "position": "Председатель СМУ",
+            "email": "vlad@mgtu.ru",
+            "scienceID": "Science-ID",
+            "imgName": "ivanov.png"
+        },
+        {
+            "name": "Иван Петров",
+            "position": "Первый помощник председателя",
+            "email": "petrov@mgtu.ru",
+            "scienceID": "Science-ID",
+            "imgName": "petrov.png"
+        },
+        {
+            "name": "Иван Петров",
+            "position": "Первый помощник председателя",
+            "email": "petrov@mgtu.ru",
+            "scienceID": "Science-ID",
+            "imgName": "petrov.png"
+        },
+        {
+            "name": "Иван Петров",
+            "position": "Первый помощник председателя",
+            "email": "petrov@mgtu.ru",
+            "scienceID": "Science-ID",
+            "imgName": "petrov.png"
+        },
+        {
+            "name": "Иван Петров",
+            "position": "Первый помощник председателя",
+            "email": "petrov@mgtu.ru",
+            "scienceID": "Science-ID",
+            "imgName": "petrov.png"
+        },
+        {
+            "name": "Иван Петров",
+            "position": "Первый помощник председателя",
+            "email": "petrov@mgtu.ru",
+            "scienceID": "Science-ID",
+            "imgName": "petrov.png"
+        }
+    ]
+}

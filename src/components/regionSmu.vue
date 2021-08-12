@@ -24,14 +24,14 @@
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                     d="M18 0H2C1.46957 0 0.960859 0.210714 0.585786 0.585786C0.210714 0.960859 0 1.46957 0 2V20L4 16H18C18.5304 16 19.0391 15.7893 19.4142 15.4142C19.7893 15.0391 20 14.5304 20 14V2C20 1.46957 19.7893 0.960859 19.4142 0.585786C19.0391 0.210714 18.5304 0 18 0ZM6 12H4V10H6V12ZM6 9H4V7H6V9ZM6 6H4V4H6V6ZM13 12H8V10H13V12ZM16 9H8V7H16V9ZM16 6H8V4H16V6Z"
-                    fill="#3C9FE5" />
+                    fill="#3C9FE5"/>
             </svg>
         </div>
         <div class="action info" @click="showInfoSmu">
             <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                     d="M22 14H18V10H22V14ZM22 30H18V18H22V30ZM20 0C17.3736 0 14.7728 0.517315 12.3463 1.52241C9.91982 2.5275 7.71504 4.00069 5.85786 5.85786C2.10714 9.60859 0 14.6957 0 20C0 25.3043 2.10714 30.3914 5.85786 34.1421C7.71504 35.9993 9.91982 37.4725 12.3463 38.4776C14.7728 39.4827 17.3736 40 20 40C25.3043 40 30.3914 37.8929 34.1421 34.1421C37.8929 30.3914 40 25.3043 40 20C40 17.3736 39.4827 14.7728 38.4776 12.3463C37.4725 9.91982 35.9993 7.71504 34.1421 5.85786C32.285 4.00069 30.0802 2.5275 27.6537 1.52241C25.2272 0.517315 22.6264 0 20 0Z"
-                    fill="#3C9FE6" />
+                    fill="#3C9FE6"/>
             </svg>
         </div>
     </div>
@@ -46,14 +46,17 @@ export default {
     methods: {
         ...mapMutations([
             'setIsSmuPageOpen',
+            'setSelectedSmuId'
         ]),
         showInfoSmu() {
             this.setIsSmuPageOpen(true);
+            this.setSelectedSmuId(this.id);
         }
     },
     props: {
         selectedRegion: Object,
-        smu: Object
+        smu: Object,
+        id: String
     }
 }
 </script>
@@ -115,7 +118,6 @@ export default {
 .logo img {
     width: 70px;
     height: 70px;
-
 }
 
 .content {

@@ -11,6 +11,7 @@ const store = new Vuex.Store({
         isSmuPageOpen: false,
         selectedRegionId: null,
         mapRussia: mapRussia,
+        selectedSmuId: null,
         legendStartColor: '#D7D7D7',
         legendEndColor: '#5E8CF0',
         legendHoverColor: '#EB5757',
@@ -58,6 +59,9 @@ const store = new Vuex.Store({
         setSelectedRegionId(state, id) {
             state.selectedRegionId = id;
         },
+        setSelectedSmuId(state, id) {
+            state.selectedSmuId = id;
+        }
     },
     actions: {
 
