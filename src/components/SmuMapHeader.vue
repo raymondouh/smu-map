@@ -22,7 +22,7 @@
                     <label for="option-YouSci">
                         <div class="filter-option-body">
                             <div class="radio-input">
-                                <input type="radio" id="option-YouSci" name="smu-filter-by" value="" checked>
+                                <input type="radio" value="YouSci" name="smu-filter-by" v-model="filterByOption" checked>
                             </div>
                             <div class="option-text">
                                 Молодым ученым
@@ -34,7 +34,7 @@
                     <label for="option-SMU">
                         <div class="filter-option-body">
                             <div class="radio-input">
-                                <input type="radio" id="option-SMU" name="smu-filter-by" value="">
+                                <input type="radio" value="SMU" name="smu-filter-by" v-model="filterByOption">
                             </div>
                             <div class="option-text">
                                 СМУ
@@ -54,12 +54,18 @@ import {
 } from 'vuex';
 import tooltip from "./Tooltip"
 export default {
+    data() {
+            return {
+                filterByOption: "YouSci"
+            }
+    },
     components: {
       tooltip
-  },
+    },
     methods: {
         ...mapMutations([
             'setIsSidebarOpen',
+            'setFilterOption'
         ]),
         openSidebar() {
             this.setIsSidebarOpen(true);
@@ -75,6 +81,13 @@ export default {
             return this.$store.state.isSidebarOpen;
         },
     },
+    watch:{
+        filterByOption() {
+            this.setFilterOption(this.filterByOption);
+        }
+    }
+
+
 };
 </script>
 <style  scoped>

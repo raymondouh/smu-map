@@ -25,18 +25,30 @@ export default {
     },
     computed: {
         ...mapState([
+            'FilterOption',
             'legendStartColor',
             'legendEndColor',
             'legendHoverColor'
         ]),
         ...mapGetters([
-            'scientistsNumRange'
+            'scientistsNumRange',
+            'smuNumRange'
         ]),
+        filterredFillColor() {
+            switch (this.FilterOption) {
+                case 'YouSci':
+                    return this.lerpColor(this.legendStartColor, this.legendEndColor, this.region.scientists / this.scientistsNumRange.max)
+                    break;
+                    case 'SMU':
+                    return this.lerpColor(this.legendStartColor, this.legendEndColor, this.region.smuNum / this.smuNumRange.max)
+                    break;
+            }
+        },
         fillColor() {
             if (this.isActive) {
                 return this.legendHoverColor
             } else {
-                return this.lerpColor(this.legendStartColor, this.legendEndColor, this.region.scientists / this.scientistsNumRange.max)
+                return this.filterredFillColor
             }
         }
     },

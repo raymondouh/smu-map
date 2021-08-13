@@ -1,0 +1,22 @@
+{
+  "id": {
+    "federalDistrict": "",
+    "region": "",
+    "city": "",
+    "organizationIssued": "",
+    "department": "",
+    "name": "",
+    "status": "",
+    "shortInfo": "",
+    "fullInfo": "",
+    "email": "",
+    "website": "",
+    "phone": "",
+    "postAddress": "",
+    "chairman": "",
+    "staff": [],
+    "projects": [],
+    "activities": [],
+    "image": ""
+    }
+}

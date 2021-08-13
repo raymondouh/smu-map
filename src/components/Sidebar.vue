@@ -23,6 +23,7 @@
                 </div>
             </div>
             <div class="list-smu" v-if="selectedRegion">
+                <!-- TODO fix a bug with id (serch results are not accessible) -->
                 <regionSmu v-for="(item, key) in smuListFilterred" :smu="item" :id="key" :selectedRegion="selectedRegion"></regionSmu>
             </div>
         </div>

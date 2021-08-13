@@ -19,6 +19,7 @@ import SmuMapLegend from "./SmuMapLegend";
 import DialogRegionInfo from "./DialogRegionInfo";
 import ScalePanel from "./ScalePanel"
 import {
+    mapState,
     mapGetters,
     mapMutations
 } from "vuex";
@@ -37,13 +38,23 @@ export default {
     },
     methods: {},
     computed: {
+        ...mapState([
+            'FilterOption'
+        ]),
         ...mapGetters([
             'smuNumRange',
             'scientistsNumRange',
         ]),
         rangeLegend() {
             //ToDo возвращение одного из двух smuNumRange и scientistsNumRange
-            return this.scientistsNumRange;
+            switch (this.FilterOption) {
+                case "YouSci":
+                    return this.scientistsNumRange;
+                    break;
+                case "SMU":
+                    return this.smuNumRange;
+                    break;
+            }
         },
         isSmuPageOpen() {
             return this.$store.state.isSmuPageOpen;

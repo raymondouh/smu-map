@@ -6,6 +6,7 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
     state: {
+        FilterOption: 'YouSci',
         isDialogDisplayed: false,
         isSidebarOpen: false,
         isSmuPageOpen: false,
@@ -38,6 +39,9 @@ const store = new Vuex.Store({
         }
     },
     mutations: {
+        setFilterOption(state, option) {
+            state.FilterOption = option;
+        },
         setIsDialogDisplayed(state, yesno) {
             state.isDialogDisplayed = yesno;
         },
