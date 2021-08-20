@@ -10,7 +10,7 @@
     </div>
     <div class="search-and-filter">
         <div class="search">
-            <input type="search" placeholder="Искать СМУ" id="SMU-search">
+            <input type="search" placeholder="Искать СМУ" v-model="searchSmu">
         </div>
         <div class="filter">
         <tooltip :tooltiptSelector="'header-tooltip'" :flowSelector="'bottom'"></tooltip>
@@ -56,6 +56,7 @@ import tooltip from "./Tooltip"
 export default {
     data() {
             return {
+                searchSmu: '',
                 filterByOption: "YouSci"
             }
     },
@@ -65,7 +66,8 @@ export default {
     methods: {
         ...mapMutations([
             'setIsSidebarOpen',
-            'setFilterOption'
+            'setFilterOption',
+            'setSearchSmu'
         ]),
         openSidebar() {
             this.setIsSidebarOpen(true);
@@ -77,17 +79,21 @@ export default {
         }
     },
     computed: {
+        searchResults(){
+
+        },
         isSidebarOpen() {
             return this.$store.state.isSidebarOpen;
         },
     },
     watch:{
-        filterByOption() {
+        searchSmu(){
+            this.setSearchSmu(this.searchSmu)
+        },
+        filterByOption(){
             this.setFilterOption(this.filterByOption);
         }
     }
-
-
 };
 </script>
 <style  scoped>

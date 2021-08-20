@@ -1,4 +1,4 @@
-<template>
+    <template>
 <div class="tooltip" :data-tooltip="dataText" :data-flow="flowSelector">
     <div class="tooltip-box">?</div>
 </div>
@@ -24,7 +24,6 @@ export default {
 <style>
 .tooltip {
     position: relative;
-    //font-family: 'Roboto', sans-serif;
     background: transparent;
     width: 30px;
 }

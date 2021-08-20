@@ -8,7 +8,7 @@
         <div class="staff">
             <div class="person-block" v-for="person in staff">
                 <div class="person-photo">
-                    <img :src="require('./../../../resources/' + person.imgName)" alt="photo">
+                    <img :src="require('./../../../resources/img/smuStaff/' + person.imgName)" alt="photo">
                 </div>
                 <div class="person-info">
                     <div class="person-name info-line">

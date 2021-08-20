@@ -22,9 +22,9 @@
                     </svg>
                 </div>
             </div>
-            <div class="list-smu" v-if="selectedRegion">
+            <div class="list-smu">
                 <!-- TODO fix a bug with id (serch results are not accessible) -->
-                <regionSmu v-for="(item, key) in smuListFilterred" :smu="item" :id="key" :selectedRegion="selectedRegion"></regionSmu>
+                <regionSmu v-for="item in filterredLoadedSmuList" :smu="item" :selectedRegion="selectedRegion"></regionSmu>
             </div>
         </div>
     </transition>
@@ -32,11 +32,14 @@
 </template>
 <script>
 import {
-    mapMutations, mapGetters
+    mapState,
+    mapMutations,
+    mapGetters
 } from 'vuex';
 
 import regionSmu from "./regionSmu"
 import regionSmuList from '../data/region-smu.json'
+import SmuByRegion from "../data/smu_by_region.json"
 
 export default {
     components: {
@@ -54,25 +57,42 @@ export default {
         }
     },
     computed: {
+        //TODO fix this
         ...mapGetters([
+            'selectedRegionID',
             'selectedRegion'
+        ]),
+        ...mapState([
+            'filterredSmu',
+            'isSidebarOpen'
         ]),
         isSidebarOpen() {
             return this.$store.state.isSidebarOpen;
         },
+        filterredLoadedSmuList() {
+            return this.selectedRegionID === null ?
+            this.loadedSmuList
+            : this.loadedSmuList[this.selectedRegionID]
+        },
         smuListFilterred() {
-            return this.searchParam === '' ? this.smuList : Object.values(this.smuList).filter(item  => item.name.toLowerCase().includes(this.searchParam.toLowerCase()));
+            return this.searchParam === '' ?
+            this.smuList
+            : Object.values(this.smuList).filter(item  => item.name.toLowerCase().includes(this.searchParam.toLowerCase()));
+        },
+        loadedSmuList() {
+            return Object.entries(this.filterredSmu).length === 0? SmuByRegion : this.filterredSmu
         }
     },
     data() {
         return {
             searchParam: '',
-            smuList: regionSmuList
+            smuList: regionSmuList,
         }
     }
 };
 </script>
 <style scoped>
+
 .sidebar {
     display: flex;
     justify-content: flex-end;
@@ -96,7 +116,6 @@ export default {
     height: 100vh;
     position: fixed;
     top: 0;
-    /*left: 0;*/
     cursor: pointer;
 }
 

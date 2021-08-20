@@ -1,8 +1,8 @@
 <template>
     <div class="SMU-activities">
-        <div class="SMU-activity conference" v-for="project in projects">
+        <div class="SMU-activity project" v-for="project in projects">
             <div class="SMU-activity-logo">
-                <img :src="require('./../../../resources/' + project.imgName)" alt="project">
+                <img :src="require('./../../../resources/img/smuReleasedProjects/' + project.imgName)" alt="project">
             </div>
             <div class="SMU-activity-info">
                 <div class="SMU-activity-name">

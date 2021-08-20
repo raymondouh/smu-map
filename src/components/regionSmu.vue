@@ -1,7 +1,7 @@
 <template>
 <div class="line-smu">
     <div class="logo" data-text="Участники (68)...">
-        <img :src="require('./../../resources/' + smu.imgName)">
+        <img :src="require('./../../resources/img/smuLogos/' + smu.imgName)">
     </div>
     <div class="content">
         <div class="title">

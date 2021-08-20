@@ -90,33 +90,29 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import {
+    mapState
+} from 'vuex'
 import tooltip from "./Tooltip"
 export default {
     components: {
-      tooltip
-  },
+        tooltip
+    },
     props: {
         rangeLegend: Object
     },
-    data() {
-        return {
-
-        };
-    },
-    methods: {},
     computed: {
         ...mapState([
-            'FilterOption',
+            'filterOption',
         ]),
         unit() {
-            switch (this.FilterOption) {
+            switch (this.filterOption) {
                 case 'YouSci':
                     return "чел."
-                break;
+                    break;
                 case 'SMU':
                     return "СМУ"
-                break;
+                    break;
             }
         }
     }
@@ -150,7 +146,7 @@ export default {
     height: 100%;
 }
 
-.legend-max{
+.legend-max {
     display: flex;
 }
 

@@ -7,7 +7,7 @@
         </div>
         <div class="contact-upper-block">
             <div class="SMU-logo">
-                <img alt="SMU-logo" :src="require('./../../../resources/' + info.imgName)">
+                <img alt="SMU-logo" :src="require('./../../../resources/img/smuLogos/' + info.imgName)">
             </div>
             <div class="main-contact-info">
                 <div class="SMU-name">

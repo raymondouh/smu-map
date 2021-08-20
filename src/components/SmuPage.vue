@@ -9,7 +9,7 @@
             </div>
         </div>
         <h1>
-            Совет молодых ученых
+            Совет молодых ученых <!--{{smuName}}-->
             <!-- TODO add smu name -->
         </h1>
     </div>
@@ -38,6 +38,7 @@
 </template>
 <script>
 import {
+    mapState,
     mapMutations
 } from 'vuex';
 import contactInfo from "./smu-page/contactInfo"
@@ -96,18 +97,6 @@ export default {
     justify-content: space-between;
 }
 
-
-
-/********SMU-staff*********/
-
-
-
-/**********SMU-activities****************/
-
-
-/***********media*****************/
-
-
 @media only screen and (max-width: 1600px) {
 
     .SMU-block {
@@ -115,7 +104,6 @@ export default {
         max-width: 750px !important;
     }
 }
-
 
 @media only screen and (max-width: 992px) {
 

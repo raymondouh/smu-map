@@ -33,21 +33,16 @@ export default {
         RussianMap,
         Sidebar,
     },
-    data() {
-        return {}
-    },
-    methods: {},
     computed: {
         ...mapState([
-            'FilterOption'
+            'filterOption'
         ]),
         ...mapGetters([
             'smuNumRange',
             'scientistsNumRange',
         ]),
         rangeLegend() {
-            //ToDo возвращение одного из двух smuNumRange и scientistsNumRange
-            switch (this.FilterOption) {
+            switch (this.filterOption) {
                 case "YouSci":
                     return this.scientistsNumRange;
                     break;

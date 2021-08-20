@@ -6,7 +6,10 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
     state: {
-        FilterOption: 'YouSci',
+        smuCount: {},
+        filterredSmu: {},
+        searchSmu: '',
+        filterOption: 'YouSci',
         isDialogDisplayed: false,
         isSidebarOpen: false,
         isSmuPageOpen: false,
@@ -25,22 +28,35 @@ const store = new Vuex.Store({
         selectedRegion: state => {
             return state.mapRussia[state.selectedRegionId];
         },
+        selectedRegionID: state => {
+            return state.selectedRegionId;
+        },
         dialogCoordinates: state => {
             return state.dialogCoordinates;
         },
         smuNumRange: state => {
-            return getRangeRegionProperty(state.mapRussia, 'smuNum');
+            return getRangeRegionProperty(state.smuCount, 'smuNum');
         },
         scientistsNumRange: state => {
             return getRangeRegionProperty(state.mapRussia, 'scientists');
         },
+
         isDialogDisplayed: state => {
             return state.isDialogDisplayed;
         }
     },
     mutations: {
+        setSmuCount(state, count){
+            state.smuCount = count;
+        },
+        setSearchSmu(state, option){
+            state.searchSmu = option;
+        },
+        setFilteredSmu(state, smu){
+            state.filterredSmu = smu;
+        },
         setFilterOption(state, option) {
-            state.FilterOption = option;
+            state.filterOption = option;
         },
         setIsDialogDisplayed(state, yesno) {
             state.isDialogDisplayed = yesno;

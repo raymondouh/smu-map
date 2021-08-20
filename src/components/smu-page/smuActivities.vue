@@ -2,7 +2,7 @@
     <div class="SMU-activities">
         <div class="SMU-activity conference" v-for="activity in activities">
             <div class="SMU-activity-logo">
-                <img :src="require('./../../../resources/' + activity.imgName)" alt="conference">
+                <img :src="require('./../../../resources/img/smuActivities/' + activity.imgName)" alt="conference">
             </div>
             <div class="SMU-activity-info">
                 <div class="SMU-activity-name">

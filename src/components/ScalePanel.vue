@@ -53,12 +53,7 @@ import tooltip from "./Tooltip"
 export default {
     components: {
         tooltip
-    },
-    data() {
-        return {}
-    },
-    methods: {},
-    computed: {}
+    }
 };
 </script>
 
@@ -71,10 +66,8 @@ export default {
     align-items: center;
     justify-content: center;
     width: 20%;
-    //height: 100%;
 }
 .input-range-scale {
-    //font-family: 'Roboto', sans-serif;
     font-size: 1rem;
     line-height: 1.1875rem;
     font-weight: 300;
@@ -82,7 +75,6 @@ export default {
     color: #9C9C9C;
     padding: 10px;
     width: 100%;
-    /*or 100% of parent*/
     display: flex;
     justify-content: space-between;
 }

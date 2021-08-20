@@ -1,5 +1,5 @@
 <template>
-<div class="info" v-if="isDialogDisplayed" :style="{top: dialogCoordinates.coordinateY + 'px', left: dialogCoordinates.coordinateX + 'px'}"><!--v-if="selectedRegion"-->
+<div class="info" v-if="isDialogDisplayed" :style="{top: dialogCoordinates.coordinateY + 'px', left: dialogCoordinates.coordinateX + 'px'}">
     <div class="region-name">
         {{selectedRegion.name}}
     </div>
@@ -9,7 +9,7 @@
         </div>
         <div class="divider"></div>
         <div class="number">
-            {{selectedRegion.smuNum}}
+            {{this.smuCount[this.selectedRegionID].smuNum}}
         </div>
     </div>
     <div class="line">
@@ -21,48 +21,26 @@
             {{selectedRegion.scientists}}
         </div>
     </div>
-    <div class="line">
-        <div class="context">
-            Образовательных организаций
-        </div>
-        <div class="divider"></div>
-        <div class="number">
-            {{selectedRegion.eduOrg}}
-        </div>
-    </div>
-    <div class="line">
-        <div class="context">
-            Научных организаций
-        </div>
-        <div class="divider"></div>
-        <div class="number">
-            {{selectedRegion.sciOrg}}
-        </div>
-    </div>
 </div>
 </template>
 
 <script>
 import {
+    mapState,
     mapGetters
 } from 'vuex';
 export default {
-    props: {
-        // region: Object,
-        // index: Number
-    },
-    data() {
-        return {
-
-        };
-    },
     methods: {
         showTitleDialog(region) {
         }
     },
     computed: {
+        ...mapState([
+            'smuCount'
+        ]),
         ...mapGetters([
             'selectedRegion',
+            'selectedRegionID',
             'isDialogDisplayed',
             'dialogCoordinates'
         ]),
@@ -79,10 +57,9 @@ export default {
     text-align: center;
     position: absolute;
     z-index: 1;
-    height: 174px;
-    width: 320px;
+    //height: 174px;
+    width: 300px;
     padding: 20px;
-    //font-family: 'Roboto', sans-serif;
     background: #F2F2F2;
     border: 2px solid #6AB1E4;
     box-sizing: border-box;

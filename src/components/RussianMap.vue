@@ -14,6 +14,12 @@ import RegionPath from './RegionPath'
 import data_json from '../data/map-russia.json'
 import DialogRegionInfo from "./DialogRegionInfo";
 import SmuMapLegend from "./SmuMapLegend";
+import SmuByRegion from "../data/smu_by_region.json"
+
+import {
+    mapState,
+    mapMutations
+} from 'vuex'
 
 export default {
     data() {
@@ -26,14 +32,50 @@ export default {
         RegionPath,
         DialogRegionInfo,
     },
-    methods: {}
+    computed: {
+        ...mapState([
+            'searchSmu'
+        ]),
+        smuNum() {
+            let res = this.searchSmu === '' ?
+            this.getSmuNum() : this.getFilterredSmuNum();
+            this.setSmuCount(res)
+            return res;
+        }
+    },
+    methods: {
+        ...mapMutations([
+            'setFilteredSmu',
+            'setSmuCount'
+        ]),
+        getSmuNum() {
+            let res = {}
+            for (const [key, value] of Object.entries(SmuByRegion)) {
+                res[key] = {"smuNum":value.length};
+            }
+            return res
+        },
+        getFilterredSmuNum() {
+            let res = {}
+            let sideSmu = {}
+            for (const [key, value] of Object.entries(SmuByRegion)) {
+                sideSmu[key] = Object.values(value).filter(item  => item.name.toLowerCase().includes(this.searchSmu.toLowerCase()));
+                res[key] = {"smuNum":sideSmu[key].length};
+            }
+            this.setFilteredSmu(sideSmu);
+            return res
+        }
+    },
+    watch: {
+        smuNum(){},
+        sideSmu(){}
+    }
 };
 </script>
 
 <style lang="less" scoped>
 .russian-map {
     text-align: center;
-    /*display: flex;*/
     width: 100%;
 }
 
@@ -44,30 +86,21 @@ svg {
     .state {
         stroke-width: 1;
         stroke: #fff;
-        //-webkit-transition: stroke 0.5s, stroke-width 0.5s;
-        //-o-transition: stroke 0.5s, stroke-width 0.5s;
-        //transition: stroke 0.5s, stroke-width 0.5s;
     }
 }
 
 .state.active,
 svg .state:hover {
     cursor: pointer;
-    //stroke-width: 1;
-    //stroke: #000;
 }
 
 path {
     transition: 0.5s;
-    //fill: #2F80ED;
     opacity: 0.75;
 }
 
 .regionActive {
     transition: 0.5s;
-
-    //fill: #EB5757!important;
-    //opacity: 0.75;
 }
 
 p {
