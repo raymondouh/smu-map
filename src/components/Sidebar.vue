@@ -24,7 +24,7 @@
             </div>
             <div class="list-smu">
                 <!-- TODO fix a bug with id (serch results are not accessible) -->
-                <regionSmu v-for="item in filterredLoadedSmuList" :smu="item" :selectedRegion="selectedRegion"></regionSmu>
+                    <regionSmu v-for="item in filterredLoadedSmuList" :smu="item"></regionSmu>
             </div>
         </div>
     </transition>
@@ -39,7 +39,6 @@ import {
 
 import regionSmu from "./regionSmu"
 import regionSmuList from '../data/region-smu.json'
-import SmuByRegion from "../data/smu_by_region.json"
 
 export default {
     components: {
@@ -57,12 +56,13 @@ export default {
         }
     },
     computed: {
-        //TODO fix this
         ...mapGetters([
             'selectedRegionID',
-            'selectedRegion'
+            'getSmuByRegion'
         ]),
         ...mapState([
+            'SmuByRegion',
+            'selectedRegionId',
             'filterredSmu',
             'isSidebarOpen'
         ]),
@@ -72,7 +72,9 @@ export default {
         filterredLoadedSmuList() {
             return this.selectedRegionID === null ?
             this.loadedSmuList
-            : this.loadedSmuList[this.selectedRegionID]
+            : this.SmuByRegion[this.selectedRegionID];
+            /*return Object.entries(this.filterredSmu).length === 0 ?
+            SmuByRegion[this.selectedRegionID] : this.filterredSmu*/
         },
         smuListFilterred() {
             return this.searchParam === '' ?
@@ -80,7 +82,8 @@ export default {
             : Object.values(this.smuList).filter(item  => item.name.toLowerCase().includes(this.searchParam.toLowerCase()));
         },
         loadedSmuList() {
-            return Object.entries(this.filterredSmu).length === 0? SmuByRegion : this.filterredSmu
+            console.log(this.getSmuByRegion);
+            return Object.entries(this.filterredSmu).length === 0? this.getSmuByRegion : this.filterredSmu
         }
     },
     data() {
@@ -88,6 +91,10 @@ export default {
             searchParam: '',
             smuList: regionSmuList,
         }
+    },
+    watch: {
+        filterredLoadedSmuList(){},
+        loadedSmuList(){}
     }
 };
 </script>

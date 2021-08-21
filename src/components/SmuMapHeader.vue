@@ -57,7 +57,7 @@ export default {
     data() {
             return {
                 searchSmu: '',
-                filterByOption: "YouSci"
+                filterByOption: "SMU"
             }
     },
     components: {
@@ -104,7 +104,6 @@ label {
 
 .smu-map-header {
     text-align: center;
-    //font-family: 'Roboto', sans-serif;
     display: flex;
     justify-content: space-between;
 }

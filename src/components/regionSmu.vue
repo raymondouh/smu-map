@@ -5,7 +5,7 @@
     </div>
     <div class="content">
         <div class="title">
-            Совет молодых ученых {{smu.name}} — {{selectedRegion.name}}
+            Совет молодых ученых {{smu.name}}
         </div>
         <div class="chairman">
             Председатель СМУ: {{smu.chairman}}
@@ -54,7 +54,6 @@ export default {
         }
     },
     props: {
-        selectedRegion: Object,
         smu: Object,
         id: String
     }
