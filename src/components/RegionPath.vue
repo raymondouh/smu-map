@@ -1,5 +1,5 @@
 <template>
-    <path :index='index' :style='{fill: fillColor}' :d='region.d' class='state' @mouseover='isActive = true, setSelectedRegionId(index), setIsDialogDisplayed(true), getCoordinates()' @mouseout='isActive = false, setIsDialogDisplayed(false)' @click="setIsSidebarOpen" :class='{regionActive: isActive}' />
+    <path :index='index' :style='{fill: fillColor}' :d='region.d' class='state' @mouseover='isActive = true, setSelectedRegionId(index), setIsDialogDisplayed(true), getCoordinates()' @mouseout='isActive = false, setIsDialogDisplayed(false)' @click='setIsSidebarOpen(true), setSelectedSmuIds(regionId)' :class='{regionActive: isActive}' />
 </template>
 
 <script>
@@ -24,6 +24,11 @@ export default {
         };
     },
     computed: {
+        regionId() {
+            let regionId = [];
+            regionId.push(this.index);
+            return regionId;
+        },
         ...mapState([
             'smuCount',
             'filterOption',
@@ -58,7 +63,8 @@ export default {
             'setSelectedRegionId',
             'setIsSidebarOpen',
             'setIsDialogDisplayed',
-            'setDialogCoordinates'
+            'setDialogCoordinates',
+            'setSelectedSmuIds'
         ]),
         setIsActive(val) {
             this.isActive = val;

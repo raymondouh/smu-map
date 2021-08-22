@@ -6,6 +6,7 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
     state: {
+        selectedSmuIds: [],
         smuCount: {},
         filterredSmu: {},
         searchSmu: '',
@@ -46,8 +47,19 @@ const store = new Vuex.Store({
         },
         getSmuByRegion: state => {
             let arr = [];
-            for (const [key, value] of Object.entries(SmuByRegion)) {
-                arr = arr.concat(value);
+            console.log(state.selectedSmuIds);
+            if (state.selectedSmuIds.length === undefined) {
+                for (const [key, value] of Object.entries(SmuByRegion)) {
+                    arr = arr.concat(value);
+                }
+            } else {
+                for (const [key, value] of Object.entries(SmuByRegion)) {
+                    for(const regionKey of state.selectedSmuIds){
+                        if (regionKey === key) {
+                            arr = arr.concat(value);
+                        }
+                    }
+                }
             }
             let res = {};
             res["regions"] = arr
@@ -56,13 +68,13 @@ const store = new Vuex.Store({
         }
     },
     mutations: {
-        setSmuCount(state, count){
+        setSmuCount(state, count) {
             state.smuCount = count;
         },
-        setSearchSmu(state, option){
+        setSearchSmu(state, option) {
             state.searchSmu = option;
         },
-        setFilteredSmu(state, smu){
+        setFilteredSmu(state, smu) {
             state.filterredSmu = smu;
         },
         setFilterOption(state, option) {
@@ -71,7 +83,7 @@ const store = new Vuex.Store({
         setIsDialogDisplayed(state, yesno) {
             state.isDialogDisplayed = yesno;
         },
-        setDialogCoordinates(state, dialogCoordinates){
+        setDialogCoordinates(state, dialogCoordinates) {
             state.dialogCoordinates = dialogCoordinates;
         },
         setIsSidebarOpen(state, yesno) {
@@ -89,6 +101,9 @@ const store = new Vuex.Store({
         setSelectedRegionId(state, id) {
             state.selectedRegionId = id;
         },
+        setSelectedSmuIds(state, ids){
+            state.selectedSmuIds = ids;
+        },
         setSelectedSmuId(state, id) {
             state.selectedSmuId = id;
         },
@@ -96,19 +111,23 @@ const store = new Vuex.Store({
             console.log(state.selectedSmuId);
             let res = {}
             for (const [key, value] of Object.entries(SmuByRegion)) {
-                res[key] = {"smuNum":value.length};
+                res[key] = {
+                    "smuNum": value.length
+                };
             }
-            state.smuCount =  res
+            state.smuCount = res
         },
         getFilterredSmuNum(state) {
             let res = {}
             let sideSmu = {}
             for (const [key, value] of Object.entries(SmuByRegion)) {
-                sideSmu[key] = Object.values(value).filter(item  => item.name.toLowerCase().includes(state.searchSmu.toLowerCase()));
-                res[key] = {"smuNum":sideSmu[key].length};
+                sideSmu[key] = Object.values(value).filter(item => item.name.toLowerCase().includes(state.searchSmu.toLowerCase()));
+                res[key] = {
+                    "smuNum": sideSmu[key].length
+                };
             }
             state.filterredSmu = sideSmu;
-            state.smuCount =  res
+            state.smuCount = res
         }
     },
     actions: {

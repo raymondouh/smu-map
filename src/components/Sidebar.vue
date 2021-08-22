@@ -14,17 +14,50 @@
                         <input type="search" placeholder="Искать СМУ" v-model="searchParam">
                     </label>
                 </div>
-                <div class="filter">
-                    <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M13.6372 14.2105L21.4913 2.55789C21.7128 2.22873 21.8127 1.81146 21.7692 1.39726C21.7258 0.983056 21.5426 0.6056 21.2595 0.347368C21.0307 0.134283 20.7485 0.012451 20.455 0H1.36508C1.05751 0.0020659 0.759571 0.124483 0.519666 0.347368C0.236637 0.6056 0.0533832 0.983056 0.00994797 1.39726C-0.0334873 1.81146 0.0664275 2.22873 0.28786 2.55789L8.18292 14.2105V23.4789C8.15825 23.7178 8.18105 23.9601 8.24958 24.1872C8.31812 24.4144 8.43057 24.6204 8.57835 24.7895L11.3055 27.9474C11.561 28.2415 11.9066 28.4065 12.2668 28.4065C12.627 28.4065 12.9726 28.2415 13.2281 27.9474C13.3783 27.7797 13.4933 "
-                            fill="#3C9FE5" />
-                    </svg>
+                <div class="contact-button">
+                    <button class="write" disabled>
+                        <div class="telegram-image">
+                            <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M9.7812 24.427L10.1851 17.1552L21.2639 5.25887C21.7544 4.72594 21.163 4.46807 20.5138 4.93223L6.83839 15.2298L0.923915 12.9949C-0.345533 12.5651 -0.359959 11.5165 1.21243 10.76L24.25 0.170278C25.3031 -0.397031 26.3129 0.47972 25.909 2.40513L21.9852 24.427C21.7111 25.9914 20.9177 26.3696 19.8214 25.6476L13.8492 20.3871L10.9785 23.705C10.6467 24.1004 10.3727 24.427 9.7812 24.427Z" />
+                            </svg>
+                        </div>
+                        <div class="button-text">
+                            НАПИСАТЬ
+                        </div>
+                    </button>
                 </div>
             </div>
+            <div class="smu-filter">
+                <div class="smu-checkbox">
+                        <label class="check-smu control-checkbox-large">
+                            <input type="checkbox" name="" value="">
+                            <div class="checkbox-indicator-large"></div>
+                        </label>
+                </div>
+                <div class="filter-buttons">
+                    <div class="button-region">
+                        <button class="sidebar-filter-button">
+                            Регион
+                        </button>
+                    </div>
+                    <div class="button-grnti">
+                        <button class="sidebar-filter-button">
+                            ГРНТИ
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="smu-sort">
+                <select class="smu-select" name="">
+                    <option value="">по численности</option>
+                    <option value="">по релевантности</option>
+                    <option value="">по дате рег-ии</option>
+                </select>
+            </div>
             <div class="list-smu">
-                <!-- TODO fix a bug with id (serch results are not accessible) -->
-                    <regionSmu v-for="item in filterredLoadedSmuList" :smu="item"></regionSmu>
+                    <!-- TODO fix a bug with id (serch results are not accessible) -->
+                    <regionSmu v-for="item in loadedSmuList" :smu="item"></regionSmu>
             </div>
         </div>
     </transition>
@@ -37,6 +70,7 @@ import {
     mapGetters
 } from 'vuex';
 
+import filterSmu from "./FilterSmu"
 import regionSmu from "./regionSmu"
 import regionSmuList from '../data/region-smu.json'
 
@@ -70,12 +104,15 @@ export default {
             return this.$store.state.isSidebarOpen;
         },
         filterredLoadedSmuList() {
+            /*
             return this.selectedRegionID === null ?
             this.loadedSmuList
             : this.SmuByRegion[this.selectedRegionID];
             /*return Object.entries(this.filterredSmu).length === 0 ?
-            SmuByRegion[this.selectedRegionID] : this.filterredSmu*/
+            SmuByRegion[this.selectedRegionID] : this.filterredSmu
+            */
         },
+
         smuListFilterred() {
             return this.searchParam === '' ?
             this.smuList
@@ -101,6 +138,7 @@ export default {
 <style scoped>
 
 .sidebar {
+    //position: relative;
     display: flex;
     justify-content: flex-end;
 }
@@ -196,6 +234,15 @@ export default {
     }
 }
 
+@media only screen and (max-width: 1060px) {
+    .button-text{
+        display: none;
+    }
+    .write{
+        width: 50px !important;
+    }
+}
+
 .sidebar-panel {
     /*overflow-y: auto;*/
     /*background-color: white;*/
@@ -228,6 +275,7 @@ export default {
 }
 
 .upper {
+    justify-content: space-between;
     display: flex;
     flex-wrap: nowrap;
     width: 100%;
@@ -235,14 +283,13 @@ export default {
 }
 
 .search {
-    display: inline-block;
-    width: 80%;
+    flex: auto;
     height: 100%;
     max-width: 660px;
 }
 
 .search label {
-    width: 80%;
+    width: 100%;
     height: 100%;
 }
 
@@ -251,31 +298,224 @@ export default {
     border: 1px solid #D1D1D1;
     border-radius: 30px;
     padding-left: 25px;
-    width: 100%;
+    width: calc(100% - 25px);
     height: 100%;
     font-size: 1.625rem;
-    color: #d1d1d1
+    color: #d1d1d1;
+    box-shadow: 0px 1px 3px 3px rgba(0, 0, 0, 0.25);
 }
 
 .search input:focus {
-    border: 1px solid #B4D3E9;
+    border: 1px solid #3c9fe5;
     outline: none;
+    box-shadow: 0px 1px 3px 3px #3c9fe5;
 }
 
-.filter {
+.contact-button{
     flex: auto;
+    max-width: 250px;
+}
+
+.write{
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: flex;
+    flex-wrap: nowrap;
+    -ms-align-items: center;
+    align-items: center;
+    justify-content: space-around;
+    margin: 0 auto;
+}
+
+button.write{
+    /* TODO: make adaptive */
+    width: 180px;
+    height: 52px;
+    background: linear-gradient(180deg, #3479E4 0%, #AACAFD 100%);
+    box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.25);
+    border: none;
+    border-radius: 10px;
+}
+
+button.write:active{
+    background: #575757;
+    transition: .009s;
+}
+
+button.write:disabled>.telegram-image path{
+    fill: #9F9F9F;
+
+}
+
+button.write:disabled>.button-text{
+    color: #9F9F9F;
+}
+
+button.write:disabled {
+    border: 2px solid #C4C4C4;
+    background: linear-gradient(180deg, #C4C4C4 0%, rgba(196, 196, 196, 0) 100%);
+}
+
+.telegram-image path{
+    fill: #FFFFFF;
+
+}
+
+.button-text{
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.0625rem;
+    line-height: 1.25rem;
+    letter-spacing: 0.05em;
+    color: #FFFFFF;
+}
+
+.smu-checkbox {
+    width: 35px;
+    margin-right: 35px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.filter:after {
-    content: '';
-    border: 8px solid transparent;
-    border-top: 8px solid #3C9FE6;
+.check-smu {
+    height: 30px;
+    display: block;
     position: relative;
-    top: 15px;
-    right: 12px;
+    padding-left: 30px;
+    margin-bottom: 5px;
+    padding-top: 3px;
+    cursor: pointer;
+    margin: 0 auto;
 }
+
+.check-smu input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+
+.checkbox-indicator-large{
+    position: absolute;
+    top: 0px;
+    left: 0;
+    height: 26px;
+    width: 26px;
+    background: #F1F1F1;
+    border: 2px solid #C4C4C4;
+    border-radius: 5px;
+}
+
+.check-smu:hover > .checkbox-indicator-large{
+    border: 2px solid #3C9FE5;
+}
+
+.check-smu input:checked~.checkbox-indicator-large {
+    background: #3C9FE5;
+    border: 2px solid #FFFFFF;
+    box-shadow: 0px 2px 5px 2px rgba(60, 159, 229, 0.85);
+}
+
+.checkbox-indicator-large:after {
+    box-sizing: unset;
+    content: '';
+    position: absolute;
+    display: none;
+}
+
+.check-smu input:checked~.checkbox-indicator-large:after {
+    display: block;
+}
+
+.control-checkbox-large .checkbox-indicator-large:after {
+    left: 8px;
+    top: 3px;
+    width: 6px;
+    height: 13px;
+    border: solid #FFFFFF;
+    border-width: 0 4px 4px 0;
+    transform: rotate(45deg);
+}
+
+.smu-filter{
+    display: flex;
+    align-items: center;
+    height: 40px;
+    margin-top: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #C5C5C5;
+}
+
+.sidebar-filter-button{
+    width: 140px;
+    height: 40px;
+    border: 2px solid #C4C4C4;
+    filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.25));
+    border-radius: 15px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.0625rem;
+    line-height: 20px;
+    letter-spacing: 0.05em;
+    color: #575757;
+}
+
+.sidebar-filter-button:active{
+    background: #3C9FE5;
+    color: #FFFFFF;
+}
+
+.sidebar-filter-button:hover{
+    border: 2px solid #3C9FE5;
+}
+
+.filter-buttons{
+    display: flex;
+}
+
+.filter-buttons button{
+    margin-right: 30px;
+}
+
+.smu-sort {
+    //box-shadow: 0px 10px 10px -10px rgba(0, 0, 0, 0.5);
+    margin-top: 15px;
+    padding-bottom: 15px;
+    width: 100%;
+    display: flex;
+}
+
+.smu-select {
+    /* TODO: make adaptive */
+    width: 220px;
+    height: 35px;
+    padding-left: 20px;
+    border: 2px solid #C4C4C4;
+    filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.25));
+    border-radius: 15px;
+    background-image: url("data:image/svg+xml,%3Csvg width='18' height='15' viewBox='0 0 18 15' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9 15L0.339745 0L17.6603 0L9 15Z' fill='%23C4C4C4'/%3E%3C/svg%3E%0A");
+    background-repeat: no-repeat;
+    background-position: right .7em top 50%;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.0625rem;
+    line-height: 1.25rem;
+    letter-spacing: 0.05em;
+    margin-left: auto;
+    margin-right: 40px;
+    color: #575757;
+}
+
+.smu-select:-ms-expand {
+    display: none;
+}
+
+.smu-select>option {
+    width: 80%;
+}
+
 
 </style>

@@ -122,14 +122,14 @@ label {
 .header-title {
     font-size: 3.125rem;
     line-height: 3.688rem;
-    font-weight: 400;
+    font-weight: bold;
 }
 
 .header-subtitle {
     font-size: 1.313rem;
     line-height: 1.563rem;
     letter-spacing: 0.01em;
-    font-weight: 400;
+    font-weight: 500;
 }
 
 .search-and-filter {
@@ -154,9 +154,11 @@ label {
     border-radius: 25px;
     border: 1px solid #d1d1d1;
     padding-left: 25px;
+    box-shadow: 0px 1px 3px 3px rgba(0, 0, 0, 0.25);
 }
 
 .search input:focus {
+    box-shadow: 0px 1px 3px 3px #3c9fe5;
     border: 1px solid #3c9fe5;
     outline: 0;
 }
@@ -241,5 +243,48 @@ label {
     font-weight: 300;
     line-height: 1.688rem;
     margin-left: 15px;
+}
+
+@media only screen and (max-width: 1540px) {
+    .header-title {
+        font-size: 2.725rem;
+        line-height: 2.8rem;
+        font-weight: bold;
+    }
+
+    .header-subtitle {
+        font-size: 1.2rem;
+        line-height: 1.4rem;
+        letter-spacing: 0.01em;
+        font-weight: 500;
+    }
+}
+@media only screen and (max-width: 1100px) {
+    .header-title {
+        font-size: 2.4rem;
+        line-height: 2.5rem;
+        font-weight: bold;
+    }
+
+    .header-subtitle {
+        font-size: 1rem;
+        line-height: 1.1rem;
+        letter-spacing: 0.01em;
+        font-weight: 500;
+    }
+}
+@media only screen and (max-width: 767px) {
+    .header-title {
+        font-size: 1.725rem;
+        line-height: 1.8rem;
+        font-weight: bold;
+    }
+
+    .header-subtitle {
+        font-size: 0.8rem;
+        line-height: 1rem;
+        letter-spacing: 0.01em;
+        font-weight: 500;
+    }
 }
 </style>
