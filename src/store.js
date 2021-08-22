@@ -27,6 +27,13 @@ const store = new Vuex.Store({
         }
     },
     getters: {
+        getRegionKeys: state => {
+            let keys = {};
+            for (const [key, value] of Object.entries(mapRussia)) {
+                keys[key] = value.name
+            }
+            console.log(keys)
+        },
         selectedRegion: state => {
             return state.mapRussia[state.selectedRegionId];
         },

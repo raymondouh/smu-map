@@ -1,5 +1,5 @@
 <template>
-    <path :index='index' :style='{fill: fillColor}' :d='region.d' class='state' @mouseover='isActive = true, setSelectedRegionId(index), setIsDialogDisplayed(true), getCoordinates()' @mouseout='isActive = false, setIsDialogDisplayed(false)' @click='setIsSidebarOpen(true), setSelectedSmuIds(regionId)' :class='{regionActive: isActive}' />
+    <path :index='index' :style='{fill: fillColor}' :d='region.d' class='state' @mouseover='isActive = true, setSelectedRegionId(index), setIsDialogDisplayed(true), getCoordinates()' @mouseout='isActive = false, setIsDialogDisplayed(false)' @click='getRegionKeys, setIsSidebarOpen(true), setSelectedSmuIds(regionId)' :class='{regionActive: isActive}' />
 </template>
 
 <script>
@@ -38,7 +38,8 @@ export default {
         ]),
         ...mapGetters([
             'scientistsNumRange',
-            'smuNumRange'
+            'smuNumRange',
+            'getRegionKeys'
         ]),
         filterredFillColor() {
             switch (this.filterOption) {

@@ -72,7 +72,6 @@ import {
 
 import filterSmu from "./FilterSmu"
 import regionSmu from "./regionSmu"
-import regionSmuList from '../data/region-smu.json'
 
 export default {
     components: {
