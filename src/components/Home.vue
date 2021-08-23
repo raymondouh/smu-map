@@ -1,6 +1,6 @@
 <template>
 <div class="wrapper">
-    <SmuPage v-show="isSmuPageOpen" />
+    <SmuPage v-show="isSmuPageOpen"/>
     <MapPage v-show="!isSmuPageOpen" />
 </div>
 </template>

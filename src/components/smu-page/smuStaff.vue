@@ -32,8 +32,7 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
-import smuStaff from './../../data/smu-page/smu-staff.json'
+import {mapState, mapGetters} from 'vuex'
 export default {
 
     computed: {
@@ -41,8 +40,11 @@ export default {
             'selectedSmuId'
         ]),
         staff() {
-            return smuStaff[this.selectedSmuId]
+            return this.getSmuStaff();
         }
+    },
+    methods: {
+      ...mapGetters(['getSmuStaff'])
     }
 }
 </script>

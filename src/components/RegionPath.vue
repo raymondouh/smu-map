@@ -1,5 +1,8 @@
 <template>
-    <path :index='index' :style='{fill: fillColor}' :d='region.d' class='state' @mouseover='isActive = true, setSelectedRegionId(index), setIsDialogDisplayed(true), getCoordinates()' @mouseout='isActive = false, setIsDialogDisplayed(false)' @click='getRegionKeys, setIsSidebarOpen(true), setSelectedSmuIds(regionId)' :class='{regionActive: isActive}' />
+    <path :index='index' :style='{fill: fillColor}' :d='region.d' class='state'
+     @mouseover='isActive = true, setIsDialogDisplayed(true), setSelectedRegionId(index), getCoordinates()'
+     @mouseout='isActive = false, setIsDialogDisplayed(false)'
+     @click='setIsSidebarOpen(true), setSelectedRegionIds(regionId)' :class='{regionActive: isActive}' />
 </template>
 
 <script>
@@ -30,11 +33,13 @@ export default {
             return regionId;
         },
         ...mapState([
+            'scientistsNum',
             'smuCount',
             'filterOption',
             'legendStartColor',
-            'legendEndColor',
-            'legendHoverColor'
+            'legendEndColorSMU',
+            'legendHoverColor',
+            'legendEndColorScientists'
         ]),
         ...mapGetters([
             'scientistsNumRange',
@@ -44,10 +49,10 @@ export default {
         filterredFillColor() {
             switch (this.filterOption) {
                 case 'YouSci':
-                    return this.lerpColor(this.legendStartColor, this.legendEndColor, this.region.scientists / this.scientistsNumRange.max)
+                    return this.lerpColor(this.legendStartColor, this.legendEndColorScientists, this.scientistsNum[this.index].scientistsNum / this.scientistsNumRange.max)
                     break;
                 case 'SMU':
-                    return this.lerpColor(this.legendStartColor, this.legendEndColor, this.smuCount[this.index].smuNum / this.smuNumRange.max)
+                    return this.lerpColor(this.legendStartColor, this.legendEndColorSMU, this.smuCount[this.index].smuNum / this.smuNumRange.max)
                     break;
             }
         },
@@ -65,7 +70,7 @@ export default {
             'setIsSidebarOpen',
             'setIsDialogDisplayed',
             'setDialogCoordinates',
-            'setSelectedSmuIds'
+            'setSelectedRegionIds'
         ]),
         setIsActive(val) {
             this.isActive = val;

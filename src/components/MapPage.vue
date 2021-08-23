@@ -57,6 +57,16 @@ export default {
         isSidebarOpen() {
             return this.$store.state.isSidebarOpen;
         },
+    },
+    created() {
+        this.calculateScientistsNum();
+        this.calculateSmuNum();
+    },
+    methods: {
+        ...mapMutations([
+            'calculateSmuNum',
+            'calculateScientistsNum'
+        ]),
     }
 };
 </script>

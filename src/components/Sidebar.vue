@@ -30,34 +30,36 @@
             </div>
             <div class="smu-filter">
                 <div class="smu-checkbox">
-                        <label class="check-smu control-checkbox-large">
-                            <input type="checkbox" name="" value="">
-                            <div class="checkbox-indicator-large"></div>
-                        </label>
+                    <label class="check-smu control-checkbox-large">
+                        <!--TODO  "select all"-->
+                        <input type="checkbox" name="" value="">
+                        <div class="checkbox-indicator-large"></div>
+                    </label>
                 </div>
                 <div class="filter-buttons">
                     <div class="button-region">
-                        <button class="sidebar-filter-button">
+                        <button class="sidebar-filter-button" @click="toggleRegionFilter()">
                             Регион
                         </button>
+                        <filterSmu :of="'region'" v-show="isRegionFilterOpen" :placeholder="'найти регион'"></filterSmu>
                     </div>
                     <div class="button-grnti">
-                        <button class="sidebar-filter-button">
+                        <button class="sidebar-filter-button" @click="toggleGrntiFilter()">
                             ГРНТИ
                         </button>
+                        <filterSmu :of="'grnti'" v-show="isGrntiFilterOpen" :placeholder="'найти ГРНТИ'"></filterSmu>
                     </div>
                 </div>
             </div>
             <div class="smu-sort">
-                <select class="smu-select" name="">
-                    <option value="">по численности</option>
-                    <option value="">по релевантности</option>
-                    <option value="">по дате рег-ии</option>
+                <select class="smu-select" name="" v-model="sortBy">
+                    <option value="staff">по численности</option>
+                    <option value="relev">по релевантности</option>
+                    <option value="regDate">по дате рег-ии</option>
                 </select>
             </div>
             <div class="list-smu">
-                    <!-- TODO fix a bug with id (serch results are not accessible) -->
-                    <regionSmu v-for="item in loadedSmuList" :smu="item"></regionSmu>
+                <smuList v-for="item in smuListFilterred" :smu="item"></smuList>
             </div>
         </div>
     </transition>
@@ -71,11 +73,12 @@ import {
 } from 'vuex';
 
 import filterSmu from "./FilterSmu"
-import regionSmu from "./regionSmu"
+import smuList from "./SmuList"
 
 export default {
     components: {
-        regionSmu
+        smuList,
+        filterSmu
     },
     methods: {
         ...mapMutations([
@@ -86,56 +89,80 @@ export default {
         },
         closeSidebar() {
             this.setIsSidebarOpen(false);
+        },
+        toggleRegionFilter() {
+            this.isRegionFilterOpen === true ?
+            this.isRegionFilterOpen = false :
+            this.isRegionFilterOpen = true
+        },
+        toggleGrntiFilter() {
+            this.isGrntiFilterOpen === true ?
+            this.isGrntiFilterOpen = false :
+            this.isGrntiFilterOpen = true
+        },
+        sortByStaff(providedArray) {
+            // TODO: sortByStaff
+            //alert("please provide sort function")
+        },
+        sortByRelevance(providedArray) {
+            // TODO: sortByRelevance
+            alert("please provide sort function")
+        },
+        sortByRegDate(providedArray) {
+            // TODO: sortByRegDate
+            alert("please provide sort function")
         }
     },
     computed: {
         ...mapGetters([
-            'selectedRegionID',
-            'getSmuByRegion'
+            'getAllSmuByRegion',
+            'getAllfilterredSmuByRegion'
         ]),
         ...mapState([
-            'SmuByRegion',
-            'selectedRegionId',
+            'selectedRegionIds',
             'filterredSmu',
             'isSidebarOpen'
         ]),
         isSidebarOpen() {
             return this.$store.state.isSidebarOpen;
         },
-        filterredLoadedSmuList() {
-            /*
-            return this.selectedRegionID === null ?
-            this.loadedSmuList
-            : this.SmuByRegion[this.selectedRegionID];
-            /*return Object.entries(this.filterredSmu).length === 0 ?
-            SmuByRegion[this.selectedRegionID] : this.filterredSmu
-            */
-        },
-
         smuListFilterred() {
-            return this.searchParam === '' ?
-            this.smuList
-            : Object.values(this.smuList).filter(item  => item.name.toLowerCase().includes(this.searchParam.toLowerCase()));
+            let filterredList = [];
+            if (this.searchParam !== '') {
+                filterredList = this.loadedSmuList.filter(item => item.name.toLowerCase().includes(this.searchParam.toLowerCase()));
+            } else {
+                filterredList = this.loadedSmuList;
+            }
+            switch (this.sortBy) {
+                case "staff":
+                    /*filterredList = */this.sortByStaff(filterredList);
+                    break;
+                case "relev":
+                    // TODO:
+                    /*filterredList = */this.sortByRelevance(filterredList);
+                    break;
+                case "regDate":
+                    // TODO:
+                    /*filterredList = */this.sortByRegDate(filterredList);
+                    break;
+            }
+            return filterredList
         },
         loadedSmuList() {
-            console.log(this.getSmuByRegion);
-            return Object.entries(this.filterredSmu).length === 0? this.getSmuByRegion : this.filterredSmu
+            return Object.entries(this.filterredSmu).length === 0 ? this.getAllSmuByRegion : this.getAllfilterredSmuByRegion
         }
     },
     data() {
         return {
+            isGrntiFilterOpen: false,
+            isRegionFilterOpen: false,
+            sortBy: "staff",
             searchParam: '',
-            smuList: regionSmuList,
         }
-    },
-    watch: {
-        filterredLoadedSmuList(){},
-        loadedSmuList(){}
     }
 };
 </script>
 <style scoped>
-
 .sidebar {
     //position: relative;
     display: flex;
@@ -234,10 +261,11 @@ export default {
 }
 
 @media only screen and (max-width: 1060px) {
-    .button-text{
+    .button-text {
         display: none;
     }
-    .write{
+
+    .write {
         width: 50px !important;
     }
 }
@@ -310,12 +338,12 @@ export default {
     box-shadow: 0px 1px 3px 3px #3c9fe5;
 }
 
-.contact-button{
+.contact-button {
     flex: auto;
     max-width: 250px;
 }
 
-.write{
+.write {
     display: -webkit-flex;
     display: -ms-flex;
     display: flex;
@@ -326,7 +354,7 @@ export default {
     margin: 0 auto;
 }
 
-button.write{
+button.write {
     /* TODO: make adaptive */
     width: 180px;
     height: 52px;
@@ -336,17 +364,17 @@ button.write{
     border-radius: 10px;
 }
 
-button.write:active{
+button.write:active {
     background: #575757;
     transition: .009s;
 }
 
-button.write:disabled>.telegram-image path{
+button.write:disabled>.telegram-image path {
     fill: #9F9F9F;
 
 }
 
-button.write:disabled>.button-text{
+button.write:disabled>.button-text {
     color: #9F9F9F;
 }
 
@@ -355,12 +383,12 @@ button.write:disabled {
     background: linear-gradient(180deg, #C4C4C4 0%, rgba(196, 196, 196, 0) 100%);
 }
 
-.telegram-image path{
+.telegram-image path {
     fill: #FFFFFF;
 
 }
 
-.button-text{
+.button-text {
     font-style: normal;
     font-weight: bold;
     font-size: 1.0625rem;
@@ -394,7 +422,7 @@ button.write:disabled {
     opacity: 0;
 }
 
-.checkbox-indicator-large{
+.checkbox-indicator-large {
     position: absolute;
     top: 0px;
     left: 0;
@@ -405,7 +433,7 @@ button.write:disabled {
     border-radius: 5px;
 }
 
-.check-smu:hover > .checkbox-indicator-large{
+.check-smu:hover>.checkbox-indicator-large {
     border: 2px solid #3C9FE5;
 }
 
@@ -436,7 +464,7 @@ button.write:disabled {
     transform: rotate(45deg);
 }
 
-.smu-filter{
+.smu-filter {
     display: flex;
     align-items: center;
     height: 40px;
@@ -445,7 +473,7 @@ button.write:disabled {
     border-bottom: 1px solid #C5C5C5;
 }
 
-.sidebar-filter-button{
+.sidebar-filter-button {
     width: 140px;
     height: 40px;
     border: 2px solid #C4C4C4;
@@ -459,20 +487,20 @@ button.write:disabled {
     color: #575757;
 }
 
-.sidebar-filter-button:active{
+.sidebar-filter-button:active {
     background: #3C9FE5;
     color: #FFFFFF;
 }
 
-.sidebar-filter-button:hover{
+.sidebar-filter-button:hover {
     border: 2px solid #3C9FE5;
 }
 
-.filter-buttons{
+.filter-buttons {
     display: flex;
 }
 
-.filter-buttons button{
+.filter-buttons button {
     margin-right: 30px;
 }
 
@@ -515,6 +543,4 @@ button.write:disabled {
 .smu-select>option {
     width: 80%;
 }
-
-
 </style>

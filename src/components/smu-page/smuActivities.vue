@@ -23,8 +23,7 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
-import closestActivities from './../../data/smu-page/closest-activities.json'
+import {mapState, mapGetters} from 'vuex'
 export default {
 
     computed: {
@@ -32,8 +31,11 @@ export default {
             'selectedSmuId'
         ]),
         activities() {
-            return closestActivities[this.selectedSmuId]
+            return this.getSmuActivities()
         }
+    },
+    methods: {
+      ...mapGetters(['getSmuActivities'])
     }
 }
 </script>

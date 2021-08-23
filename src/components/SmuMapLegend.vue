@@ -6,7 +6,7 @@
             <tooltip :tooltiptSelector="'legend-tooltip'" :flowSelector="'right'"></tooltip>
         </div>
         <div class="legend-body">
-            <svg width="38" height="305" viewBox="0 0 38 305" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+            <svg width="38" height="305" viewBox="0 0 38 305" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg":style="styleObject">
                 <g id="SMU-gradient-background">
                     <rect style="fill:url(#linearGradient1617);fill-opacity:1;" width="36" height="303" x="1" y="1" />
                 </g>
@@ -95,6 +95,11 @@ import {
 } from 'vuex'
 import tooltip from "./Tooltip"
 export default {
+    data(){
+        return {
+            isCustomColor: false
+        }
+    },
     components: {
         tooltip
     },
@@ -102,15 +107,23 @@ export default {
         rangeLegend: Object
     },
     computed: {
+        styleObject() {
+            return this.isCustomColor ?
+                {background: 'linear-gradient(' + this.legendEndColorScientists + ', #D7D7D7)'} : {background:''}
+
+        },
         ...mapState([
             'filterOption',
+            'legendEndColorScientists'
         ]),
         unit() {
             switch (this.filterOption) {
                 case 'YouSci':
+                    this.isCustomColor = true;
                     return "чел."
                     break;
                 case 'SMU':
+                    this.isCustomColor = false;
                     return "СМУ"
                     break;
             }

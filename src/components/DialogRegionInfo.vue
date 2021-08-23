@@ -9,7 +9,7 @@
         </div>
         <div class="divider"></div>
         <div class="number">
-            {{this.smuCount[this.selectedRegionID].smuNum}}
+            {{this.smuCount[this.selectedRegionId].smuNum}}
         </div>
     </div>
     <div class="line">
@@ -18,7 +18,7 @@
         </div>
         <div class="divider"></div>
         <div class="number">
-            {{selectedRegion.scientists}}
+            {{this.scientistsNum[this.selectedRegionId].scientistsNum}}
         </div>
     </div>
 </div>
@@ -36,11 +36,12 @@ export default {
     },
     computed: {
         ...mapState([
-            'smuCount'
+            'smuCount',
+            'scientistsNum',
+            'selectedRegionId'
         ]),
         ...mapGetters([
             'selectedRegion',
-            'selectedRegionID',
             'isDialogDisplayed',
             'dialogCoordinates'
         ]),

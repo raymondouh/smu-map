@@ -1,44 +1,85 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import mapRussia from './data/map-russia.json'
-import SmuByRegion from './data/smu_by_region.json'
+// TODO: request this from server
+import smuByRegion from './data/smu_by_region.json'
+// TODO: request this from server
+import smuStaff from './data/smu-page/smu-staff.json'
+// TODO: request this from server
+import contactInfo from './data/smu-page/contact-info.json'
+// TODO: request this from server
+import closestActivities from './data/smu-page/closest-activities.json'
+// TODO: request this from server
+import releasedProjects from './data/smu-page/released-projects.json'
+
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
     state: {
-        selectedSmuIds: [],
-        smuCount: {},
-        filterredSmu: {},
-        searchSmu: '',
+        /*header*/
+        searchRequest: '',
         filterOption: 'SMU',
-        isDialogDisplayed: false,
-        isSidebarOpen: false,
-        isSmuPageOpen: false,
+
+        /*map*/
         selectedRegionId: null,
-        SmuByRegion: SmuByRegion,
-        mapRussia: mapRussia,
-        selectedSmuId: null,
+        isDialogDisplayed: false,
+
+        smuCount: {},
+        scientistsNum: {},
+        dialogCoordinates: {coordinateX: "", coordinateY: ""},
+
+        /*map legend*/
         legendStartColor: '#D7D7D7',
-        legendEndColor: '#5E8CF0',
+        legendEndColorSMU: '#5E8CF0',
+        legendEndColorScientists: '#4D0099',
         legendHoverColor: '#EB5757',
-        dialogCoordinates: {
-            coordinateX: "",
-            coordinateY: ""
-        }
+
+        /*sidebar*/
+        isSidebarOpen: false,
+
+        selectedRegionIds: [],
+        filterredSmu: {},
+
+        /*smupage*/
+        isSmuPageOpen: false,
+        selectedSmuId: 1,//
+
+        /*data*/
+        smuStaff: smuStaff,
+        smuByRegion: smuByRegion,
+        mapRussia: mapRussia,
     },
     getters: {
         getRegionKeys: state => {
-            let keys = {};
-            for (const [key, value] of Object.entries(mapRussia)) {
-                keys[key] = value.name
+            let keys = [];
+            for (const [key, value] of Object.entries(state.mapRussia)) {
+                let obj = {}
+                obj["id"] = key;
+                obj["name"] = value.name;
+                keys.push(obj);
             }
-            console.log(keys)
+            return keys;
         },
+        getSmuGrntis: state => {
+
+        },
+        getContactInfo: state => {
+            return getDataByJson(contactInfo, state.selectedSmuId);
+        },
+        getSmuStaff: state => {
+            return getDataByJson(smuStaff, state.selectedSmuId);
+        },
+
+        getSmuActivities: state => {
+            return getDataByJson(closestActivities, state.selectedSmuId);
+        },
+
+        getSmuProjects: state => {
+            return getDataByJson(releasedProjects, state.selectedSmuId);
+        },
+
         selectedRegion: state => {
             return state.mapRussia[state.selectedRegionId];
-        },
-        selectedRegionID: state => {
-            return state.selectedRegionId;
         },
         dialogCoordinates: state => {
             return state.dialogCoordinates;
@@ -47,31 +88,16 @@ const store = new Vuex.Store({
             return getRangeRegionProperty(state.smuCount, 'smuNum');
         },
         scientistsNumRange: state => {
-            return getRangeRegionProperty(state.mapRussia, 'scientists');
+            return getRangeRegionProperty(state.scientistsNum, 'scientistsNum');
         },
         isDialogDisplayed: state => {
             return state.isDialogDisplayed;
         },
-        getSmuByRegion: state => {
-            let arr = [];
-            console.log(state.selectedSmuIds);
-            if (state.selectedSmuIds.length === undefined) {
-                for (const [key, value] of Object.entries(SmuByRegion)) {
-                    arr = arr.concat(value);
-                }
-            } else {
-                for (const [key, value] of Object.entries(SmuByRegion)) {
-                    for(const regionKey of state.selectedSmuIds){
-                        if (regionKey === key) {
-                            arr = arr.concat(value);
-                        }
-                    }
-                }
-            }
-            let res = {};
-            res["regions"] = arr
-            console.log(res);
-            return arr;
+        getAllSmuByRegion: state => {
+            return getSmyByRegionsArray(state.selectedRegionIds, state.smuByRegion)
+        },
+        getAllfilterredSmuByRegion: state => {
+            return getSmyByRegionsArray(state.selectedRegionIds, state.filterredSmu)
         }
     },
     mutations: {
@@ -79,7 +105,7 @@ const store = new Vuex.Store({
             state.smuCount = count;
         },
         setSearchSmu(state, option) {
-            state.searchSmu = option;
+            state.searchRequest = option;
         },
         setFilteredSmu(state, smu) {
             state.filterredSmu = smu;
@@ -108,27 +134,40 @@ const store = new Vuex.Store({
         setSelectedRegionId(state, id) {
             state.selectedRegionId = id;
         },
-        setSelectedSmuIds(state, ids){
-            state.selectedSmuIds = ids;
-        },
-        setSelectedSmuId(state, id) {
+        setSelectedSmuId(state, id){
             state.selectedSmuId = id;
         },
-        getSmuNum(state) {
-            console.log(state.selectedSmuId);
-            let res = {}
-            for (const [key, value] of Object.entries(SmuByRegion)) {
-                res[key] = {
+        setSelectedRegionIds(state, id) {
+            state.selectedRegionIds = id;
+        },
+        calculateScientistsNum(state) {
+            let scientists = {}
+            for (const [key, value] of Object.entries(smuStaff)) {
+                let scientistsInRegion = 0;
+
+                for(const [keyl, valuel] of Object.entries(value)){
+                    scientistsInRegion += valuel.length;
+                }
+                scientists[key] = {
+                    "scientistsNum": scientistsInRegion
+                };
+            }
+            state.scientistsNum = scientists
+        },
+        calculateSmuNum(state, object = state.smuByRegion) {
+            let smuS = {}
+            for (const [key, value] of Object.entries(object)) {
+                smuS[key] = {
                     "smuNum": value.length
                 };
             }
-            state.smuCount = res
+            state.smuCount = smuS
         },
-        getFilterredSmuNum(state) {
+        searchSmu(state) {
             let res = {}
             let sideSmu = {}
-            for (const [key, value] of Object.entries(SmuByRegion)) {
-                sideSmu[key] = Object.values(value).filter(item => item.name.toLowerCase().includes(state.searchSmu.toLowerCase()));
+            for (const [key, value] of Object.entries(smuByRegion)) {
+                sideSmu[key] = Object.values(value).filter(item => item.name.toLowerCase().includes(state.searchRequest.toLowerCase()));
                 res[key] = {
                     "smuNum": sideSmu[key].length
                 };
@@ -142,6 +181,34 @@ const store = new Vuex.Store({
     }
 });
 
+function getDataByJson(object, prop){
+    let requested = {};
+    for (const [key, value] of Object.entries(object)) {
+        for (const [keyl, valuel] of Object.entries(value)) {
+            if (keyl == prop) {
+                return valuel;
+            }
+        }
+    }
+}
+
+function getSmyByRegionsArray(regionsArray, object) {
+    let arr = [];
+    if (regionsArray.length === 0) {
+        for (const [key, value] of Object.entries(object)) {
+            arr = arr.concat(value);
+        }
+    } else {
+        for (const [key, value] of Object.entries(object)) {
+            for(const regionKey of regionsArray){
+                if (regionKey === key) {
+                    arr = arr.concat(value);
+                }
+            }
+        }
+    }
+    return arr;
+}
 //obj = {key: {prop: val}}
 function getRangeRegionProperty(obj, prop) {
     let min = 0;

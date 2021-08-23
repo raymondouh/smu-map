@@ -41,10 +41,10 @@ import {
     mapState,
     mapMutations
 } from 'vuex';
-import contactInfo from "./smu-page/contactInfo"
-import smuStaff from "./smu-page/smuStaff"
-import closestActivities from "./smu-page/smuActivities"
-import releasedProjects from "./smu-page/smuProjects"
+import contactInfo from "./smu-page/ContactInfo"
+import smuStaff from "./smu-page/SmuStaff"
+import closestActivities from "./smu-page/SmuActivities"
+import releasedProjects from "./smu-page/SmuProjects"
 export default {
     components: {
         contactInfo,

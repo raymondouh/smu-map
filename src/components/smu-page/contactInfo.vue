@@ -64,17 +64,20 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
-import contactInfo from './../../data/smu-page/contact-info.json'
+import {mapState, mapGetters} from 'vuex'
 export default {
 
     computed: {
         ...mapState([
-            'selectedSmuId'
+            'selectedSmuId',
+            'selectedRegionIds'
         ]),
         info() {
-            return contactInfo[this.selectedSmuId]
+            return this.getContactInfo();
         }
+    },
+    methods: {
+      ...mapGetters(['getContactInfo'])
     }
 }
 </script>
@@ -96,8 +99,6 @@ export default {
     font-size: 3rem;
     line-height: 5rem;
 }
-
-/************contact-info*********/
 
 .contact-info,
 .SMU-staff {

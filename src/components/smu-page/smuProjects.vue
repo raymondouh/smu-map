@@ -22,8 +22,7 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
-import releasedProjects from './../../data/smu-page/released-projects.json'
+import {mapState, mapGetters} from 'vuex'
 export default {
 
     computed: {
@@ -31,8 +30,11 @@ export default {
             'selectedSmuId'
         ]),
         projects() {
-            return releasedProjects[this.selectedSmuId]
+            return this.getSmuProjects()
         }
+    },
+    methods: {
+       ...mapGetters(['getSmuProjects'])
     }
 }
 </script>

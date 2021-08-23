@@ -14,7 +14,6 @@ import RegionPath from './RegionPath'
 import data_json from '../data/map-russia.json'
 import DialogRegionInfo from "./DialogRegionInfo";
 import SmuMapLegend from "./SmuMapLegend";
-import SmuByRegion from "../data/smu_by_region.json"
 
 import {
     mapState,
@@ -31,44 +30,6 @@ export default {
         SmuMapLegend,
         RegionPath,
         DialogRegionInfo,
-    },
-    computed: {
-        ...mapState([
-            'searchSmu'
-        ]),
-        smuNum() {
-            let res = this.searchSmu === '' ?
-            this.getSmuNum() : this.getFilterredSmuNum();
-            this.setSmuCount(res)
-            return res;
-        }
-    },
-    methods: {
-        ...mapMutations([
-            'setFilteredSmu',
-            'setSmuCount'
-        ]),
-        getSmuNum() {
-            let res = {}
-            for (const [key, value] of Object.entries(SmuByRegion)) {
-                res[key] = {"smuNum":value.length};
-            }
-            return res
-        },
-        getFilterredSmuNum() {
-            let res = {}
-            let sideSmu = {}
-            for (const [key, value] of Object.entries(SmuByRegion)) {
-                sideSmu[key] = Object.values(value).filter(item  => item.name.toLowerCase().includes(this.searchSmu.toLowerCase()));
-                res[key] = {"smuNum":sideSmu[key].length};
-            }
-            this.setFilteredSmu(sideSmu);
-            return res
-        }
-    },
-    watch: {
-        smuNum(){},
-        sideSmu(){}
     }
 };
 </script>
@@ -81,8 +42,6 @@ export default {
 
 svg {
     width: 80%;
-    /*height: 100vh;*/
-
     .state {
         stroke-width: 1;
         stroke: #fff;

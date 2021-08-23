@@ -3,7 +3,7 @@
     <div class="sort-header">
         <div class="sort-header-search">
             <label>
-                <input type="search" placeholder="">
+                <input type="search" :placeholder="placeholder" v-model="search">
                 </input>
             </label>
         </div>
@@ -15,12 +15,12 @@
         </div>
     </div>
     <div class="region-options">
-        <div class="region-option" v-for="option in options">
+        <div class="region-option" v-for="elem in filterredFilterValues">
             <label class="check-region control-checkbox">
-                <input type="checkbox" name="" value="">
+                <input type="checkbox" name="" :value="elem.id" v-model="selectedRegions">
                 <div class="checkbox-indicator"></div>
                 <div class="region-text">
-                    Регион 1
+                    {{elem.name}}
                 </div>
             </label>
         </div>
@@ -29,15 +29,48 @@
 </template>
 
 <script>
+import {
+    mapState,
+    mapGetters,
+    mapMutations
+} from 'vuex'
 export default {
     props: {
-        options: Object
+        of: String,
+        placeholder: String
+    },
+    computed: {
+        ...mapState(['selectedRegionIds']),
+        ...mapGetters(['getRegionKeys']),
+        ...mapMutations(['setSelectedRegionIds']),
+        filterValues() {
+            return this.of === 'region' ? this.getRegionKeys : this.getSmuGrntis
+        },
+        filterredFilterValues() {
+            return this.search === '' ? this.filterValues : this.filterValues.filter(item => item.name.toLowerCase().includes(this.search.toLowerCase()));
+        },
+        selectedRegions: {
+            get() {
+                return this.$store.state.selectedRegionIds
+            },
+            set(value) {
+                this.$store.state.selectedRegionIds = value
+            }
+        }
+    },
+    data() {
+        return {
+            search: '',
+        }
     }
 }
 </script>
 
 <style>
 .sort-panel {
+    overflow: hidden;
+    z-index: 5;
+    position: absolute;
     width: 390px;
     max-height: 700px;
     background: #FFFFFF;
@@ -88,13 +121,16 @@ export default {
 }
 
 .region-options {
-    width: 100%;
+    overflow: auto;
+    max-height: 600px;
     margin-top: 30px;
     padding-left: 30px;
 }
 
 .region-option {
-    margin-bottom: 10px;
+    height: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .check-region {
