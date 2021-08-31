@@ -27,6 +27,8 @@ body, html{
 }
 
 body {
+    max-width: 1920px;
+    margin: 0 auto;
     overflow: hidden;
 }
 
@@ -36,7 +38,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     //text-align: center;
-    height: 100vh;
+    height: 100%;
 }
 html {
     font-family: sans-serif;

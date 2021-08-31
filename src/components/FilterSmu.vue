@@ -72,12 +72,13 @@ export default {
     z-index: 5;
     position: absolute;
     width: 390px;
-    max-height: 700px;
+    max-height: 70%;
     background: #FFFFFF;
     border: 1px solid #515151;
     border-radius: 20px;
     padding: 20px;
     padding-top: 40px;
+    padding-bottom: 10px;
 }
 
 .sort-header {
@@ -122,9 +123,10 @@ export default {
 
 .region-options {
     overflow: auto;
-    max-height: 600px;
+    max-height:400px;
     margin-top: 30px;
     padding-left: 30px;
+    margin-bottom: 80px;
 }
 
 .region-option {

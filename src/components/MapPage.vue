@@ -71,14 +71,81 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
+<style>
 .map-page {
-    padding: 2rem 0 0 2rem;
+    width: 100%;
+    height: 100%;
 }
 
 .map-wraper {
+    margin: 0 auto;
     position: relative;
     display: flex;
     width: 100%;
+    height: 80%!important;
+}
+
+@media(max-height: 967px){
+    .map-wraper{
+        height: 85%!important;
+    }
+    svg {
+        width: 75%!important;
+    }
+}
+@media(max-height: 800px){
+    .map-wraper{
+        height: 80%!important;
+    }
+    svg {
+        width: 56%!important;
+    }
+}
+@media(max-height: 667px){
+    .map-wraper{
+        height: 75%!important;
+    }
+    svg {
+        width: 50%!important;
+    }
+}
+@media(max-height: 590px){
+    .map-wraper{
+        height: 72%!important;
+    }
+    svg {
+        width: 40%!important;
+    }
+}
+@media(max-height: 500px){
+    .map-wraper{
+        height: 65%!important;
+    }
+    svg {
+        width: 30%!important;
+    }
+}
+@media(max-height: 400px){
+    .map-wraper{
+        height: 58%!important;
+    }
+    svg {
+        width: 20%!important;
+    }
+}
+@media (max-width: 1900px){
+    svg {
+        width: 80%;
+    }
+}
+@media (max-width: 1000px){
+    svg {
+        width: 75%;
+    }
+}
+@media (max-width: 767px){
+    svg {
+        width: 65%;
+    }
 }
 </style>

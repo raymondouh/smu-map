@@ -100,6 +100,9 @@ label {
 }
 
 .smu-map-header {
+    z-index: 3;
+    margin-top: 2rem;
+    //height: 16%;
     text-align: center;
     display: flex;
     justify-content: space-between;
@@ -163,23 +166,23 @@ label {
 
 .filter {
     color: #575757;
-    margin-top: 30px;
+    margin-top: 17px;
     flex: auto;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 }
 
 .filter-start-block {
     font-size: 1rem;
     font-weight: bold;
     line-height: 1.688rem;
-    margin-right: 55px;
+    margin-right: 20px;
 }
 
 .filter-options {
     flex: auto;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 }
 
 .filter-option {

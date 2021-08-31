@@ -36,12 +36,17 @@ export default {
 
 <style lang="less" scoped>
 .russian-map {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    width: 100%;
+    width: 90%;
 }
 
 svg {
-    width: 80%;
+    margin: 0 auto;
+    max-width: 1500px;
     .state {
         stroke-width: 1;
         stroke: #fff;
